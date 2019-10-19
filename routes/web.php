@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/ola/{nome}/{sobrenome}', function ($nome, $sobrenome) {
+    return "Olá, seja bem vindo $nome $sobrenome!!!";
+});
