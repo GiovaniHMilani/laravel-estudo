@@ -11,6 +11,70 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use Illuminate\Http\Request;
+
+Route::get("/", function () {
+    return view("welcome");
+});
+
+Route::get("/seunome/{nome?}", function ($nome = null) {
+    if (isset($nome)) {
+        return "Olá, seja bem vindo $nome!!!";
+    }
+    return "Você não digitou nenhum nome";
+});
+
+Route::get("/rotacomregras/{nome}/{n}", function ($nome, $n) {
+    for ($i = 0; $i < $n; $i++) {
+        echo "Olá! seja bem vindo, $nome <br />";
+    }
+})->where("nome", "[A-Za-z]+")->where("n", "[0-9]+");
+
+
+Route::prefix("/aplication")->group(function () {
+
+    Route::get("/", function () {
+        return view("app");
+    })->name("app");
+
+    Route::get("/user", function () {
+        return view("user");
+    })->name("app.user");
+
+    Route::get("/profile", function () {
+        return view("profile");
+    })->name("app.profile");
+});
+
+Route::get("/produtos", function () {
+    echo "<h1>Produtos</h1>";
+    echo "<ol>";
+    echo "<li>Notebook </li>";
+    echo "<li>Impressora </li>";
+    echo "<li>Mouse </li>";
+    echo "</ol>";
+})->name("meusprodutos");
+
+
+Route::redirect("todosprodutos1", "produtos", 301);
+
+Route::get("todosprodutos2", function () {
+    return redirect()->route("meusprodutos");
+});
+
+
+Route::post("/requisicoes", function (Request $request) {
+    return "Hello POST";
+});
+
+Route::get("/requisicoes", function (Request $request) {
+    return "Hello GET";
+});
+
+Route::delete("/requisicoes", function (Request $request) {
+    return "Hello DELETE";
+});
+
+Route::put("/requisicoes", function (Request $request) {
+    return "Hello PUT";
 });
