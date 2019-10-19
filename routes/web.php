@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/ola/{nome}/{sobrenome}', function ($nome, $sobrenome) {
-    return "Olá, seja bem vindo $nome $sobrenome!!!";
+Route::get('/seunome/{nome?}', function ($nome = null) {
+    if (isset($nome)) {
+        return "Olá, seja bem vindo $nome!!!";
+    }
+    return "Você não digitou nenhum nome";
 });
