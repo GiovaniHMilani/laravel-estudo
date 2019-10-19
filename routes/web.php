@@ -29,17 +29,26 @@ Route::get("/rotacomregras/{nome}/{n}", function ($nome, $n) {
 })->where("nome", "[A-Za-z]+")->where("n", "[0-9]+");
 
 
-Route::prefix("/app")->group(function () {
+Route::prefix("/aplication")->group(function () {
 
     Route::get("/", function () {
         return view("app");
-    });
+    })->name('app');
 
     Route::get("/user", function () {
         return view("user");
-    });
+    })->name('app.user');
 
     Route::get("/profile", function () {
         return view("profile");
-    });
+    })->name('app.profile');
 });
+
+Route::get('/produtos', function () {
+    echo "<h1>Produtos</h1>";
+    echo "<ol>";
+    echo "<li>Notebook </li>";
+    echo "<l1>Impressora </li>";
+    echo "<l1>Mouse </li>";
+    echo "</ol>";
+})->name("meusprodutos");
