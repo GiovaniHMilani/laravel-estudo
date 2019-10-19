@@ -33,22 +33,29 @@ Route::prefix("/aplication")->group(function () {
 
     Route::get("/", function () {
         return view("app");
-    })->name('app');
+    })->name("app");
 
     Route::get("/user", function () {
         return view("user");
-    })->name('app.user');
+    })->name("app.user");
 
     Route::get("/profile", function () {
         return view("profile");
-    })->name('app.profile');
+    })->name("app.profile");
 });
 
-Route::get('/produtos', function () {
+Route::get("/produtos", function () {
     echo "<h1>Produtos</h1>";
     echo "<ol>";
     echo "<li>Notebook </li>";
-    echo "<l1>Impressora </li>";
-    echo "<l1>Mouse </li>";
+    echo "<li>Impressora </li>";
+    echo "<li>Mouse </li>";
     echo "</ol>";
 })->name("meusprodutos");
+
+
+Route::redirect("todosprodutos1", "produtos", 301);
+
+Route::get("todosprodutos2", function () {
+    return redirect()->route("meusprodutos");
+});
